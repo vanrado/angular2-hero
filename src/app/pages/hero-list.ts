@@ -1,33 +1,33 @@
 //our root app component
-import {Component, EventEmitter, Output} from '@angular/core'
+import {Component, EventEmitter, Output, OnInit} from '@angular/core'
 import {Hero} from "../models/Hero";
+import {HeroService} from "../hero.service";
 
 @Component({
   selector: 'hero-list',
-  providers: [],
-  styleUrls:['app/pages/hero-list.css'],
+  styleUrls: ['app/pages/hero-list.css'],
   templateUrl: 'app/pages/hero-list.html',
-  directives: []
+  directives: [],
+  providers: [HeroService]
 })
-export class HeroList {
-  heroes : Hero[];
+export class HeroList implements OnInit {
+  ngOnInit():any {
+    // this.heroService.getHeroes().then(function (heroes) {
+    //   this.heroes = heroes;
+    // });
+    // Arrow function
+    this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+  }
+
+  heroes:Hero[];
   @Output() outputSelectedHero = new EventEmitter();
   private title;
 
-  constructor() {
+  constructor(private heroService:HeroService) {
     this.title = 'Angular2 (Release Candidate!)';
-    this.heroes = [
-      new Hero(1, "Janko"),
-      new Hero(2, "Janko2"),
-      new Hero(3, "Janko3"),
-      new Hero(4, "Janko4"),
-      new Hero(5, "Janko5"),
-      new Hero(6, "Janko6"),
-      new Hero(7, "Janko7"),
-    ];
   }
 
-  onSelect(hero: Hero){
+  onSelect(hero:Hero) {
     this.outputSelectedHero.emit({selectedHero: hero});
   }
 }
