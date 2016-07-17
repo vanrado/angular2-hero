@@ -1,4 +1,4 @@
-import {Hero} from "./models/Hero";
+import {Hero} from "../models/Hero";
 
 export const MOCK_HEROES = [
   new Hero(1, "Janko"),

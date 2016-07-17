@@ -1,28 +1,24 @@
-import {Component} from '@angular/core';
-import {Hero} from "./models/Hero";
-import {HeroDetail} from "./pages/hero-detail";
-import {HeroList} from "./pages/hero-list";
+import {Component}       from '@angular/core';
+import {HeroService}     from './hero.service';
+import {HeroesComponent} from "./pages/heroes.component";
 import {AppHeader} from "./pages/app-header";
+import {ROUTER_DIRECTIVES} from '@angular/router';
 
 @Component({
-  moduleId: module.id,
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css'],
-  directives: [AppHeader, HeroList, HeroDetail],
+  selector: 'my-app',
+  template: `
+    <app-header></app-header>
+    <nav>
+      <a [routerLink]="['/dashboard']" routerLinkActive="active">Dashboard</a>
+      <a [routerLink]="['/heroes']" routerLinkActive="active">Heroes</a>
+    </nav>
+    <router-outlet></router-outlet>
+  `,
+  directives: [HeroesComponent, AppHeader, ROUTER_DIRECTIVES],
+  providers: [
+    HeroService
+  ]
 })
 export class AppComponent {
-  selectedHero:Hero;
-
-  constructor() {
-  }
-
-  onSelected(hero:Hero) {
-    console.log(this.selectedHero);
-    if (this.selectedHero !== undefined && this.selectedHero == hero) {
-      this.selectedHero = undefined;
-    } else {
-      this.selectedHero = hero;
-    }
-  }
+  title = 'Tour of Heroes';
 }

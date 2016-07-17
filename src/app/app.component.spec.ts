@@ -6,9 +6,9 @@ import {
   expect, it, xit,
   async, inject
 } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import { HeroesComponent } from './pages/heroes.component';
 
-beforeEachProviders(() => [AppComponent]);
+beforeEachProviders(() => [HeroesComponent]);
 
 describe('App: Angular2Hero', () => {
   // it('should create the app',
